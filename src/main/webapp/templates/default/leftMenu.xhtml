@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:p="http://primefaces.org/ui">
+
+    <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">FILTRE</a></li>
+        
+    </ul>
+    <h:form> 
+    <p:inputText alt="Compte" style="margin-bottom: 20px;" id="compte"/>
+    <p:watermark for="compte" value="No Compte" id="cpt" />
+    <p:inputText alt="brand" label="Brand" style="margin-bottom: 20px;" id="brand"/>
+    <p:watermark for="brand" value="Brand" id="brd" />
+    <p:inputText alt="circuit" label="Circuit" style="margin-bottom: 20px;" id="circuit"/>
+    <p:watermark for="circuit" value="Circuit" id="cir" />
+    <br/>
+    <p:separator />
+    <p:commandButton  label="Filtrer" value="Filtrer" class="btn btn-primary" action="#{pdvBean.change()}" style="width:90% "/>
+   
+    <p:separator />
+    <p:commandButton class="btn btn-primary" value="Importer PDV" onclick="PF('importer_dialog').show()" icon="ui-icon-disk" style="width:90% "/>
+    </h:form>
+    
+    <p:dialog id="import" header="Importer des PDV" widgetVar="importer_dialog"  width="500" showEffect="clip" hideEffect="explode" > 
+                    <h:form id ="importform"  enctype="multipart/form-data">
+                        <h:panelGrid id="display" columns="2" >
+                            <h:outputText  value="Selectionner le fichier excel " />  
+                            <p:fileUpload required="true"  value="#{pdvBean.file}" mode="simple"
+                                          auto="true"  
+                                          sizeLimit="100000"   
+                                          allowTypes="/(\.|\/)(xslx|xsl)$/" class="syntaxe_content" update="feuille" process="@this" invalidFileMessage="fichier invalide" requiredMessage="chargez le fichier" > 
+                                <!--                                    <p:ajax listener="" event="change" update="cities" process="@this"/>-->
+                            </p:fileUpload>
+                            <f:facet name="footer"> <br/>  
+                                <p:commandButton value="Importer" action="#{pdvBean.importer()}"  oncomplete="PF('ajouter_dialog').hide()" icon="ui-icon-disk"  ajax="false" styleClass="RedButton"/>  
+                            </f:facet>
+                            <f:facet name="footer">  
+                                <p:commandButton value="Effacer" type="reset" styleClass="RedButton"/>  
+                            </f:facet>
+                        </h:panelGrid> 
+                    </h:form>
+                </p:dialog>
+</ui:composition>
+
