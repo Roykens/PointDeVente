@@ -15,10 +15,10 @@ public class NewCrossOriginResourceSharingFilter implements ContainerResponseFil
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext response) {
         response.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
-        response.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE");
+        response.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTION");
         response.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type");
         requestContext.getHeaders().putSingle("Access-Control-Allow-Origin", "*");
-        requestContext.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE");
+        requestContext.getHeaders().putSingle("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, OPTION");
         requestContext.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type");
     }
     
